@@ -1,2 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using online_school.Services;
+
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        ServiceEnrolment test = new ServiceEnrolment();
+        test.ShowEnrolments();
+    }
+}

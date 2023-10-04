@@ -134,15 +134,22 @@ namespace online_school.Services
             return ct;
 
         }
-        public void userSubscriptions(String studentId)
+        public String[] userSubscriptions(String studentId)
         {
-           
+            String[] aux = new String[100];
+            String auxiliar;
+            int t = 0;
             for (int i = 0; i < _enrolmentList.Count; i++)
                 if (_enrolmentList[i].GetIdElev().Equals(studentId))
                 {
-                     Console.WriteLine(_enrolmentList[i].GetIdCurs());
-                     
+                    auxiliar = _enrolmentList[i].GetIdCurs();
+
+                    aux[t] = auxiliar;
+
+                    t++;
+
                 }
+            return aux;
 
         }
         

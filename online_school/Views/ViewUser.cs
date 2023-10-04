@@ -92,7 +92,7 @@ namespace online_school.Views
             Console.WriteLine("Apasati tasta 2 pentru a va inscrie la un curs.");
             Console.WriteLine("Apasati tasta 3 pentru a va dezabona de la curs. ");
             Console.WriteLine("Apasati tasta 4 pentru a afla la cate materii sunteti inscris.");
-            Console.WriteLine("Apasati tasta 5 pentru a afisa materiile la care sunteti inscris.");//Aici apar doar id-urile
+            Console.WriteLine("Apasati tasta 5 pentru a afisa materiile la care sunteti inscris.");
             Console.WriteLine("Apasati tasta 6 pentru a vedea punctajul total al materiilor dvs.");
             Console.WriteLine("Apasati tasta 7 pentru a va schimba parola");
             
@@ -128,7 +128,7 @@ namespace online_school.Views
                         Console.WriteLine(this._serviceEnrolment.coursesCounter(student1));
                         break;
                     case 5:
-                        subscription(student1);
+                        this._serviceCourse.subscriptions(_serviceEnrolment.userSubscriptions(student1.GetId()));
                         break;
                     case 6:
                         Console.WriteLine("Punctajul total: " + this._serviceCourse.pointsSum(_serviceEnrolment.coursesPoints(student1)));

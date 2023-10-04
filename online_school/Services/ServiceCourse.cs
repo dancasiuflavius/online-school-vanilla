@@ -157,6 +157,18 @@ namespace online_school.Services
                 
             return suma;
         }
+        public void subscriptions(String[] cursuri)
+        {
+            for (int i = 0; i < _courseList.Count(); i++)
+
+                for (int j = 0; j < cursuri.Length; j++)
+
+                    if (_courseList[i].GetId().Equals(cursuri[j]))
+                    {
+                        Console.WriteLine(_courseList[i].GetCourseName());
+                       
+                    }
+        }
         
     }
 }

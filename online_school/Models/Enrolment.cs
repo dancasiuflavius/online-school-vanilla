@@ -11,6 +11,7 @@ namespace online_school.Models
         private String _id;
         private String _idElev;
         private String _idCurs;
+
         
 
         public Enrolment()

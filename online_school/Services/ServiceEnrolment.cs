@@ -14,7 +14,7 @@ namespace online_school.Services
 
         private string _filePath;
 
-        public ServiceCourse curs = new ServiceCourse();
+        
 
         
 
@@ -134,28 +134,25 @@ namespace online_school.Services
             return ct;
 
         }
-        public String[] userSubscriptions(String studentId)
+        public List<String> userSubscriptions(String studentId)
         {
-            String[] aux = new String[100];
-            String auxiliar;
+            List<String> aux = new List<String>();
+            string convertor = "";
+            
             int t = 0;
             for (int i = 0; i < _enrolmentList.Count; i++)
                 if (_enrolmentList[i].GetIdElev().Equals(studentId))
                 {
-                    auxiliar = _enrolmentList[i].GetIdCurs();
-
-                    aux[t] = auxiliar;
-
-                    t++;
+                    convertor =_enrolmentList[i].GetIdCurs() ;
+                    aux.Add(convertor);
 
                 }
             return aux;
 
-        }
-        
-        public String[] coursesPoints(Student student)
+        }       
+        public List<String> coursesPoints(Student student)
         {
-            String[] aux = new String[100];
+            List<String> aux = new List<String>();
             String auxiliar;
             int t = 0;
             
@@ -164,10 +161,8 @@ namespace online_school.Services
                 {
                     auxiliar = _enrolmentList[i].GetIdCurs();
                     
-                    aux[t] = auxiliar;
-                    
-                    t++;
-                  
+                    aux.Add(auxiliar);
+                                                 
                 }
             
                 return aux;

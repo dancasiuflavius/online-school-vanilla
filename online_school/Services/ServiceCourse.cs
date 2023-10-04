@@ -136,16 +136,16 @@ namespace online_school.Services
 
 
         //}
-        public int pointsSum(String[] idCursuri)
+        public int pointsSum(List<String> idCursuri)
         {
             int suma = 0;
-            int lungimeVector = 0;
+          
             
 
             
             for (int i = 0;i< _courseList.Count();i++)         
             
-                for(int j = 0;j< idCursuri.Length;j++)
+                for(int j = 0;j< idCursuri.Count();j++)
                 
                 if (_courseList[i].GetId().Equals(idCursuri[j]))
                 {
@@ -157,17 +157,23 @@ namespace online_school.Services
                 
             return suma;
         }
-        public void subscriptions(String[] cursuri)
+        public List<String> subscriptions(List<String> cursuri)
         {
+
+            List<String> aux = new List<String>();
+            String auxiliar;
+
             for (int i = 0; i < _courseList.Count(); i++)
 
-                for (int j = 0; j < cursuri.Length; j++)
+                for (int j = 0; j < cursuri.Count(); j++)
 
                     if (_courseList[i].GetId().Equals(cursuri[j]))
                     {
-                        Console.WriteLine(_courseList[i].GetCourseName());
+                        auxiliar = _courseList[i].GetCourseName();
+                        aux.Add(auxiliar);
                        
                     }
+            return aux;
         }
         
     }

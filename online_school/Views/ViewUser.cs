@@ -76,6 +76,21 @@ namespace online_school.Views
         {     
             _serviceEnrolment.userSubscriptions(student1.GetId());
         }
+        public void showPoints()
+        {
+            Console.WriteLine("Punctajul total: " + this._serviceCourse.pointsSum(_serviceEnrolment.coursesPoints(student1)));
+        }
+        public void showSubscriptions()
+        {
+
+            List<string> list = this._serviceCourse.subscriptions(_serviceEnrolment.userSubscriptions(student1.GetId()));
+          
+            for (int i=0;i<list.Count; i++)
+            {
+
+                Console.WriteLine(list[i]);
+            }
+        }
 
 
         
@@ -128,10 +143,10 @@ namespace online_school.Views
                         Console.WriteLine(this._serviceEnrolment.coursesCounter(student1));
                         break;
                     case 5:
-                        this._serviceCourse.subscriptions(_serviceEnrolment.userSubscriptions(student1.GetId()));
+                        this.showSubscriptions();
                         break;
                     case 6:
-                        Console.WriteLine("Punctajul total: " + this._serviceCourse.pointsSum(_serviceEnrolment.coursesPoints(student1)));
+                        this.showPoints();
                         break;
                     case 7:
                         _serviceStudent.ChangePassword(student1);                    
@@ -142,6 +157,9 @@ namespace online_school.Views
                 }
             }
         }
+
+
+
 
         
     }

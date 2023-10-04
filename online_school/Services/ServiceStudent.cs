@@ -52,11 +52,94 @@ namespace online_school.Services
                 Console.WriteLine("An error occurred while reading the file: " + e.Message);
             }
         }
+        //public void WriteStudent(Student student)
+        //{
+        //    string filePath = GetDirectory();
+
+        //    using(StreamWriter writer = new StreamWriter(filePath))
+        //    {
+        //       string line;
+        //       if(!File.Exists(filePath))
+        //       {
+        //            File.WriteAllText(filePath, student);
+        //       }
+        //    }
+        //}
         public void ShowStudents()
         {
             for (int i = 0; i < _studentList.Count; i++)
                 Console.WriteLine(_studentList[i].GetStudentDescription());
         }
+
+        public bool FindStudentByID(Student student)
+        {
+            for (int i = 0; i < _studentList.Count(); i++)
+            {
+                if (student.GetId().Equals(_studentList[i].GetId()))
+                    return true;
+            }
+                
+            return false;
+        }
+        public void AddStudent(Student student)
+        {
+            if (FindStudentByID(student) == true)
+                Console.WriteLine("Studentul se afla deja in lista");
+            else
+                _studentList.Add(student);
+            
+        }
+        public void RemoveStudent(String id)
+        {
+            for (int i = 0; i < _studentList.Count; i++)
+            {
+                if (_studentList[i].GetId().Equals(id))
+                {
+                    _studentList.RemoveAt(i);
+                }
+                else
+                    Console.WriteLine("Nu puteti elimina un student inexistent");
+                break;
+            }
+                                                     
+        }
+        public void UpdateStudent(String id, String surname, String name, int age, String newId, String password)
+        {
+            for (int i = 0; i < _studentList.Count; i++)
+            {
+                if (_studentList[i].GetId().Equals(id))
+                {
+
+                    _studentList[i].SetSurname(surname);
+                    _studentList[i].SetName(name);
+                    _studentList[i].SetAge(age);
+                    _studentList[i].SetId(newId);
+                    _studentList[i].SetPassword(password);
+                }
+            }
+        }
+        public void ChangePassword(Student student)
+        {
+            String oldPw = "";
+            String newPw = "";
+            Console.WriteLine("Introduceti parola veche.");
+            oldPw = Console.ReadLine();
+            if (student.GetPassword().Equals(oldPw))
+            {
+                Console.WriteLine("Introduceti parola noua.");
+                newPw = Console.ReadLine();
+                student.SetPassword(newPw);
+                
+                UpdateStudent(student.GetId(), student.GetSurname(), student.GetName(), student.GetAge(), student.GetId(), student.GetPassword());
+                Console.WriteLine("Parola schimbata cu succes.");
+            }
+            else
+                Console.WriteLine("Parolele nu corespund. Incercati din nou...");
+            
+              
+        }
+
+       
 
     }
 }

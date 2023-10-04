@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace online_school.Models
 {
-    internal class Enrolment
+    public class Enrolment
     {
         private String _id;
         private String _idElev;

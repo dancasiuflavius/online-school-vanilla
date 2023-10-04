@@ -10,7 +10,11 @@ namespace online_school.Services
     public class ServiceCourse
     {
         private List<Course> _courseList;
+
+
         private String _filePath;
+
+        
 
         public ServiceCourse()
         {
@@ -19,6 +23,10 @@ namespace online_school.Services
 
             this.ReadCourse();
         }
+
+        //Get pt lista in alta clasa
+        // public List<Course> CourseList { get { return _courseList; } }
+
 
         public string GetDirectory()
         {
@@ -56,5 +64,99 @@ namespace online_school.Services
                 Console.WriteLine(_courseList[i].GetCourseDescription());
         }
 
+
+        //~~~CRUD~~~
+        #region
+        public bool FindCourseByID(Course course)
+        {
+            for (int i = 0; i < _courseList.Count(); i++)
+            {
+                if (course.GetId().Equals(_courseList[i].GetId()))
+                    return true;
+            }
+
+            return false;
+        }
+
+        public Course FindCourseByName(String course)
+        {
+            for (int i = 0; i < _courseList.Count(); i++)
+            {
+                if (_courseList[i].GetCourseName().Equals(course))
+                    return _courseList[i];
+            }
+
+            return null;
+        }
+        public void AddCourse(Course course)
+        {
+            if (FindCourseByID(course) == true)
+                Console.WriteLine("Cursul exista deja");
+            else
+                _courseList.Add(course);
+
+        }
+        public void RemoveCourse(String id)
+        {
+            for (int i = 0; i < _courseList.Count; i++)
+            {
+                if (_courseList[i].GetId().Equals(id))
+                {
+                    _courseList.RemoveAt(i);
+                }
+                else
+                    Console.WriteLine("Nu puteti elimina un curs inexistent");
+                break;
+            }
+        }
+        public void UpdateCourse(String id, String courseName, String courseDescription, int points, int duration, String newId)
+        {
+            for (int i = 0; i < _courseList.Count; i++)
+            {
+                if (_courseList[i].GetId().Equals(id))
+                {
+
+                    _courseList[i].SetCourseName(courseName);
+                    _courseList[i].SetCourseInformation(courseDescription);
+                    _courseList[i].SetPoints(points);
+                    _courseList[i].SetDuration(duration);
+                    _courseList[i].SetId(newId);
+                }
+            }
+        }
+        #endregion
+
+        //~~~Functionalities~~~
+
+        //public String convertIDtoName(String studentId)
+        //{
+        //    String[] aux = new String[100];
+        //    int t = 0;
+        //    enro.userSubscriptions(studentId);
+
+
+        //}
+        public int pointsSum(String[] idCursuri)
+        {
+            int suma = 0;
+            int lungimeVector = 0;
+            
+
+            
+            for (int i = 0;i< _courseList.Count();i++)         
+            
+                for(int j = 0;j< idCursuri.Length;j++)
+                
+                if (_courseList[i].GetId().Equals(idCursuri[j]))
+                {
+                    
+                    suma = suma + _courseList[i].GetPoints();
+                }
+                     
+            
+                
+            return suma;
+        }
+        
     }
 }

@@ -96,18 +96,18 @@ namespace online_school.Services
                 _courseList.Add(course);
 
         }
-        public void RemoveCourse(String id)
+        public bool RemoveCourse(String id)
         {
             for (int i = 0; i < _courseList.Count; i++)
             {
                 if (_courseList[i].GetId().Equals(id))
                 {
                     _courseList.RemoveAt(i);
+                    return true;
                 }
-                else
-                    Console.WriteLine("Nu puteti elimina un curs inexistent");
-                break;
+               
             }
+            return false;
         }
         public void UpdateCourse(String id, String courseName, String courseDescription, int points, int duration, String newId)
         {

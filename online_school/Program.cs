@@ -8,12 +8,14 @@ internal class Program
     private static void Main(string[] args)
     {
 
-       //Student student = new Student("Flavius", " Dancasiu", 20, "1B2A", "qwer1324");
-        ViewUser user = new ViewUser();
-        user.Play();
-        //ServiceCourse curs = new ServiceCourse();
-        //ServiceEnrolment enro = new ServiceEnrolment();
-       
-        //Console.WriteLine(curs.pointsSum(enro.coursesPoints(student)));
+        // Admin student = new Admin("A8", " Admin8", "test8@mail.com", "qwer1324");
+        //ServiceAdmin admin = new ServiceAdmin();
+        //admin.AddAdmin(student);
+        //admin.RemoveAdmin("A1");
+        //admin.ShowAdmin();
+
+        ViewAdmin view = new ViewAdmin();
+        view.Play();
+        
     }
 }

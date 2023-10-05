@@ -13,13 +13,6 @@ namespace online_school.Services
         private List<Enrolment> _enrolmentList;
 
         private string _filePath;
-
-        
-
-        
-
-        
-
         public ServiceEnrolment()
         {
             _enrolmentList = new List<Enrolment>();
@@ -81,18 +74,18 @@ namespace online_school.Services
                 _enrolmentList.Add(enrolment);
 
         }
-        public void RemoveEnrolment(String id)
+        public bool RemoveEnrolment(String id)
         {
             for (int i = 0; i < _enrolmentList.Count; i++)
             {
                 if (_enrolmentList[i].GetId().Equals(id))
                 {
                     _enrolmentList.RemoveAt(i);
+                    return true;
                 }
-                else
-                    Console.WriteLine("Nu puteti elimina un enrolment inexistent");
-                break;
+                
             }
+            return false;
         }
         public void RemoveEnrolmentByStudIdCourseId(String studentId, String courseId)
         {

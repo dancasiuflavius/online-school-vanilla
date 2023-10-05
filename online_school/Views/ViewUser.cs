@@ -15,7 +15,7 @@ namespace online_school.Views
         private ServiceStudent _serviceStudent;
 
 
-        private Student student1 = new Student("Flavius", "Dancasiu", 20, "D1F3", "qwer1324");
+        private Student student1 = new Student("Flavius", "Dancasiu", 20, "D1F3", "qwer1324", "test@mail.com");
 
         public string randomID()
         {

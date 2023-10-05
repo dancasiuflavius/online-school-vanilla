@@ -89,21 +89,23 @@ namespace online_school.Services
                 _studentList.Add(student);
             
         }
-        public void RemoveStudent(String id)
+        public bool RemoveStudent(String id)
         {
             for (int i = 0; i < _studentList.Count; i++)
             {
                 if (_studentList[i].GetId().Equals(id))
                 {
                     _studentList.RemoveAt(i);
+
+                    return true;
                 }
-                else
-                    Console.WriteLine("Nu puteti elimina un student inexistent");
-                break;
+           
             }
+
+            return false;
                                                      
         }
-        public void UpdateStudent(String id, String surname, String name, int age, String newId, String password)
+        public void UpdateStudent(String id, String surname, String name, int age, String newId, String mail, String password)
         {
             for (int i = 0; i < _studentList.Count; i++)
             {
@@ -114,6 +116,7 @@ namespace online_school.Services
                     _studentList[i].SetName(name);
                     _studentList[i].SetAge(age);
                     _studentList[i].SetId(newId);
+                    _studentList[i].SetEmail(mail);
                     _studentList[i].SetPassword(password);
                 }
             }
@@ -130,7 +133,7 @@ namespace online_school.Services
                 newPw = Console.ReadLine();
                 student.SetPassword(newPw);
                 
-                UpdateStudent(student.GetId(), student.GetSurname(), student.GetName(), student.GetAge(), student.GetId(), student.GetPassword());
+                UpdateStudent(student.GetId(), student.GetSurname(), student.GetName(), student.GetAge(), student.GetId(), student.GetEmail(), student.GetPassword());
                 Console.WriteLine("Parola schimbata cu succes.");
             }
             else
@@ -139,7 +142,20 @@ namespace online_school.Services
               
         }
 
-       
+       public List<String> GetStudentList(List<String> list)
+       {
+            List<String> aux = new List<String>();
+            
+            for (int i = 0; i < _studentList.Count(); i++)
+
+                for (int j = 0; j < list.Count(); j++)
+
+                    if (_studentList[i].GetId().Equals(list[j]))
+                    {                       
+                        aux.RemoveAt(i);
+                    }
+            return aux;
+       }
 
     }
 }

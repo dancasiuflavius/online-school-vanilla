@@ -2,7 +2,10 @@
 using online_school.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -161,6 +164,91 @@ namespace online_school.Services
                 return aux;
 
         }
+        public String frequencyEnrolmentsMax()
+        {
+            String[] vector = new String[100];
+            String mostFrqElement = "";
+            int[] frecventa = new int[100];
+            int ct = 0;
+            int maxim = -999;
+
+
+            for (int i = 0; i < _enrolmentList.Count; i++)
+            {
+                vector[i] = _enrolmentList[i].GetIdElev();
+                frecventa[i] = -1;
+            }
+               
+            int n = _enrolmentList.Count;
+            for (int i = 0; i < n; i++)
+            {
+                ct = 1;
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (vector[i] == vector[j])
+                    {
+                        ct++;
+                        frecventa[j] = 0;
+                    }
+                }
+                if (frecventa[i] != 0)
+                {
+                    frecventa[i] = ct;
+                }
+                if (maxim < ct)
+                {
+                    maxim = ct;
+                    mostFrqElement = vector[i];
+                }
+                   
+            }
+            return mostFrqElement;
+                               
+        }
+        public String frequencyEnrolmentsMin()
+        {
+            String[] vector = new String[100];
+            String lessFrqElement = "";
+            int[] frecventa = new int[100];
+            int ct = 0;
+            int minim = 99999;
+
+
+            for (int i = 0; i < _enrolmentList.Count; i++)
+            {
+                vector[i] = _enrolmentList[i].GetIdElev();
+                frecventa[i] = -1;
+            }
+
+            int n = _enrolmentList.Count;
+            for (int i = 0; i < n; i++)
+            {
+                ct = 1;
+                for (int j = i + 1; j < n; j++)
+                {
+                    
+                    if (vector[i] == vector[j])
+                    {
+                        ct++;
+                        frecventa[j] = 0;
+                    }
+                }
+                if (frecventa[i] != 0)
+                {
+                    frecventa[i] = ct;
+                }
+                if (minim > ct)
+                {
+                   
+                    minim = ct;
+                    lessFrqElement = vector[i];
+                }
+
+            }
+            return lessFrqElement;
+
+        }
+
 
     }
 }

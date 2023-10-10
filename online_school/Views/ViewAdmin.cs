@@ -87,6 +87,39 @@ namespace online_school.Views
                 Console.WriteLine("Nu puteti elimina un enrolment inexistent.");
 
         }
+        public void UpdateEnrolment()
+        {
+            try
+            {
+                String ID = "";
+                String _newID = "";
+                String _idElev = "";
+                String _idCurs = "";
+               
+                
+
+
+                Console.WriteLine("Introduceti ID-ul enrolment-ului: ");
+                ID = Console.ReadLine();
+
+                Console.WriteLine("Introduceti ID-ul nou al enrolment-ului: ");
+                _newID = Console.ReadLine();
+
+                Console.WriteLine("Introduceti ID-ul nou al studentului: ");
+                _idElev = Console.ReadLine();
+
+                Console.WriteLine("Introduceti ID-ul nou al cursului: ");
+                _idCurs = Console.ReadLine();
+
+                
+
+                this._serviceEnrolment.UpdateEnrolment(ID, _newID, _idElev, _idCurs);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Something went wrong...");
+            }
+        }
         public void RemoveCourse()
         {
             String id = "";
@@ -96,6 +129,58 @@ namespace online_school.Views
                 Console.WriteLine("Curs eliminat cu succes!");
             else
                 Console.WriteLine("Nu puteti elimina un curs inexistent.");
+        }
+        public void UpdateCourse()
+        {
+            try
+            {
+                String ID = "";
+                String _courseName = "";
+                String _courseDescription = "";
+                int _points = 0;
+                int _duration = 0;
+                String _newID = "";
+
+
+                Console.WriteLine("Introduceti ID-ul cursului: ");
+                ID = Console.ReadLine();
+
+                Console.WriteLine("Introduceti numele nou al cursului: ");
+                _courseName = Console.ReadLine();
+
+                Console.WriteLine("Introduceti descrierea cursului: ");
+                _courseDescription = Console.ReadLine();
+
+                Console.WriteLine("Introduceti punctele alocate cursului: ");
+
+                _points = Int32.Parse(Console.ReadLine());
+
+                Console.WriteLine("Introduceti durata cursului (Nr. Saptamani) : ");
+
+                _duration = Int32.Parse(Console.ReadLine());
+
+                Console.WriteLine("Introduceti ID-ul nou al cursului: ");
+                _newID = Console.ReadLine();
+
+
+
+                this._serviceCourse.UpdateCourse(ID, _courseName, _courseDescription, _points, _duration, _newID);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Something went wrong...");
+            }
+        }
+        public void StudentMostEnrolments()
+        {
+                       
+             //Returneaza ID-ul studentului cu cele mai multe inregistrari la cursuri  
+            Console.WriteLine(_serviceEnrolment.frequencyEnrolmentsMax());
+        }
+        public void StudentLessEnrolments()
+        {
+            Console.WriteLine(_serviceEnrolment.frequencyEnrolmentsMin()); 
+            
         }
 
         public void Meniu()
@@ -107,6 +192,8 @@ namespace online_school.Views
             Console.WriteLine("Apasati tasta 4 pentru a modifica un enrolment.");
             Console.WriteLine("Apasati tasta 5 pentru a sterge datele unui curs");
             Console.WriteLine("Apasati tasta 6 pentru a modifica un curs.");
+            Console.WriteLine("Apasati tasta 7 pentru a afisa ID-ul studentului inscris la cele mai multe cursuri.");
+            Console.WriteLine("Apasati tasta 8 pentru a afisa ID-ul studentului inscris la cele mai putine cursuri.");
         }
         public void Play()
         {
@@ -137,17 +224,20 @@ namespace online_school.Views
                         
                         break;
                     case 4:
-                        this._serviceEnrolment.ShowEnrolments();
+                        this.UpdateEnrolment();
                         
                         break;
                     case 5:
                         this.RemoveCourse();
                         break;
                     case 6:
-                        this._serviceCourse.ShowCourses();
+                        this.UpdateCourse();
                         break;
                     case 7:
-                        
+                        this.StudentMostEnrolments();
+                        break;
+                    case 8:
+                        this.StudentLessEnrolments();
                         break;
                     default:
                         Console.WriteLine("Comanda invalida");

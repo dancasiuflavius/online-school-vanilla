@@ -2,7 +2,11 @@
 using online_school.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Numerics;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -161,6 +165,67 @@ namespace online_school.Services
                 return aux;
 
         }
+       
+
+        //functie ce  parametru idUnui Curs si returneazxa numarul de enrolmenturi
+
+        public int nrEnrolments(String idStudent)
+        {
+            int ct = 0;
+
+            for(int i=0; i < _enrolmentList.Count;i++)
+            {
+                if (idStudent.Equals(_enrolmentList[i].GetIdElev()))
+                    ct++;
+            }
+            return ct;
+        }
+
+
+        public String frequencyEnrolmentsMax()
+        {
+
+            String id="";
+            int max = -1;
+
+            for(int i = 0; i < this._enrolmentList.Count; i++)
+            {
+
+                string idStudent = this._enrolmentList[i].GetIdElev();
+                int nrEnrols = nrEnrolments(idStudent);
+                if (nrEnrols > max &&!id.Equals(idStudent))
+                {
+                    max = nrEnrols;
+
+                    id = this._enrolmentList[i].GetIdElev();
+                }
+            }
+           
+            return id;
+                               
+        }
+        public String frequencyEnrolmentsMin()
+        {
+            String id = "";
+            int min = 999;
+
+            for (int i = 0; i < this._enrolmentList.Count; i++)
+            {
+
+                string idStudent = this._enrolmentList[i].GetIdElev();
+                int nrEnrols = nrEnrolments(idStudent);
+                if (nrEnrols < min && !id.Equals(idStudent))
+                {
+                    min = nrEnrols;
+
+                    id = this._enrolmentList[i].GetIdElev();
+                }
+            }
+
+            return id;
+
+        }
+
 
     }
 }

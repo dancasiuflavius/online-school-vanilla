@@ -17,8 +17,8 @@ internal class Program
         ViewAdmin view = new ViewAdmin();
         view.Play();
 
-       // ServiceEnrolment admin = new ServiceEnrolment();
-        //Console.Write(admin.frequencyEnrolmentsMin());
+        //ServiceEnrolment admin = new ServiceEnrolment();
+        //admin.frecventaVector();
         
     }
 }

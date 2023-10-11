@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
@@ -164,88 +165,64 @@ namespace online_school.Services
                 return aux;
 
         }
+       
+
+        //functie ce  parametru idUnui Curs si returneazxa numarul de enrolmenturi
+
+        public int nrEnrolments(String idStudent)
+        {
+            int ct = 0;
+
+            for(int i=0; i < _enrolmentList.Count;i++)
+            {
+                if (idStudent.Equals(_enrolmentList[i].GetIdElev()))
+                    ct++;
+            }
+            return ct;
+        }
+
+
         public String frequencyEnrolmentsMax()
         {
-            String[] vector = new String[100];
-            String mostFrqElement = "";
-            int[] frecventa = new int[100];
-            int ct = 0;
-            int maxim = -999;
 
+            String id="";
+            int max = -1;
 
-            for (int i = 0; i < _enrolmentList.Count; i++)
+            for(int i = 0; i < this._enrolmentList.Count; i++)
             {
-                vector[i] = _enrolmentList[i].GetIdElev();
-                frecventa[i] = -1;
+
+                string idStudent = this._enrolmentList[i].GetIdElev();
+                int nrEnrols = nrEnrolments(idStudent);
+                if (nrEnrols > max &&!id.Equals(idStudent))
+                {
+                    max = nrEnrols;
+
+                    id = this._enrolmentList[i].GetIdElev();
+                }
             }
-               
-            int n = _enrolmentList.Count;
-            for (int i = 0; i < n; i++)
-            {
-                ct = 1;
-                for (int j = i + 1; j < n; j++)
-                {
-                    if (vector[i] == vector[j])
-                    {
-                        ct++;
-                        frecventa[j] = 0;
-                    }
-                }
-                if (frecventa[i] != 0)
-                {
-                    frecventa[i] = ct;
-                }
-                if (maxim < ct)
-                {
-                    maxim = ct;
-                    mostFrqElement = vector[i];
-                }
-                   
-            }
-            return mostFrqElement;
+           
+            return id;
                                
         }
         public String frequencyEnrolmentsMin()
         {
-            String[] vector = new String[100];
-            String lessFrqElement = "";
-            int[] frecventa = new int[100];
-            int ct = 0;
-            int minim = 99999;
+            String id = "";
+            int min = 999;
 
-
-            for (int i = 0; i < _enrolmentList.Count; i++)
+            for (int i = 0; i < this._enrolmentList.Count; i++)
             {
-                vector[i] = _enrolmentList[i].GetIdElev();
-                frecventa[i] = -1;
+
+                string idStudent = this._enrolmentList[i].GetIdElev();
+                int nrEnrols = nrEnrolments(idStudent);
+                if (nrEnrols < min && !id.Equals(idStudent))
+                {
+                    min = nrEnrols;
+
+                    id = this._enrolmentList[i].GetIdElev();
+                }
             }
 
-            int n = _enrolmentList.Count;
-            for (int i = 0; i < n; i++)
-            {
-                ct = 1;
-                for (int j = i + 1; j < n; j++)
-                {
-                    
-                    if (vector[i] == vector[j])
-                    {
-                        ct++;
-                        frecventa[j] = 0;
-                    }
-                }
-                if (frecventa[i] != 0)
-                {
-                    frecventa[i] = ct;
-                }
-                if (minim > ct)
-                {
-                   
-                    minim = ct;
-                    lessFrqElement = vector[i];
-                }
-
-            }
-            return lessFrqElement;
+            return id;
 
         }
 

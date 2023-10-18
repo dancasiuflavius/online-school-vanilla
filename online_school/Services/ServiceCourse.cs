@@ -239,6 +239,14 @@ namespace online_school.Services
                     idMaterie= _courseList[i].GetId();
             return idMaterie;
         }
+        public String FindCourseByTeacher(String teacherId)
+        {
+            String idMaterie = "";
+            for (int i = 0; i < _courseList.Count; i++)
+                if (_courseList[i].GetTeacherID().Equals(teacherId))
+                    idMaterie = _courseList[i].GetId();
+            return idMaterie;
+        }
 
 
     }

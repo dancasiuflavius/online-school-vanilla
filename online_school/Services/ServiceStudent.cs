@@ -168,5 +168,16 @@ namespace online_school.Services
 
         }
 
+        public Student FindStudentById(String studentId)
+        {
+            for (int i = 0; i < _studentList.Count(); i++)
+            {
+                if (studentId.Equals(_studentList[i].GetId()))
+                    return _studentList[i];
+            }
+
+            return null;
+        }
+
     }
 }

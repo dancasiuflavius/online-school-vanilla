@@ -105,16 +105,26 @@ namespace online_school.Views
                 
                 if (this._serviceCourse.IsCourseTeachedBy(_numeMaterie, this.teacher1.GetId()))
                 {
+
                     
-                    String id = this.teacher1.GetId();
+                    String idMaterie = "";
+                    String idProfesor = "";
+                    idProfesor = this.teacher1.GetId();
+                   
+
+                    idMaterie = this._serviceCourse.FindCourseByTeacher(idProfesor);
+
                     List<String> idStudenti = new List<String>();
                     List<String> numeStudenti = new List<String>();
-                    idStudenti= this._serviceEnrolment.GetIdOfStudents(id);
+                    idStudenti= this._serviceEnrolment.GetIdOfStudents(idMaterie);
                     
-                    this._serviceStudent.GetStudentNameByEnrolmentId(this._serviceEnrolment.GetIdOfStudents(id));
+                    this._serviceStudent.GetStudentNameByEnrolmentId(this._serviceEnrolment.GetIdOfStudents(idMaterie));
 
-                    foreach (var i in this._serviceStudent.GetStudentNameByEnrolmentId(this._serviceEnrolment.GetIdOfStudents(id)))
+                    foreach (var i in this._serviceStudent.GetStudentNameByEnrolmentId(this._serviceEnrolment.GetIdOfStudents(idMaterie)))
+                    {
                         Console.WriteLine(i.ToString());
+                    }
+                        
 
 
 

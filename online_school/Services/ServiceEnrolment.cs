@@ -276,9 +276,7 @@ namespace online_school.Services
                     {
                         idStudenti.Add(_enrolmentList[i].GetIdElev());
                     }
-                }
-                    
-                    
+                }  
 
             }
             return idStudenti;

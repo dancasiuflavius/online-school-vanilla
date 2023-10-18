@@ -282,6 +282,23 @@ namespace online_school.Services
             return idStudenti;
         }
 
+        public int Maxim(List<String> materii)
+        {
+            int maxim = -999;
+            int nr = 0;
+            int poz = 0;
+            for(int i = 0;i<materii.Count;i++)
+            {
+                nr = NumberOfStudents(materii[i]);
+                if (maxim < nr)
+                {
+                    maxim = nr;
+                    poz = i;
+
+                }
+            }
+            return poz;
+        }
 
     }
 }

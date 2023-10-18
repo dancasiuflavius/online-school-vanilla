@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography.X509Certificates;
 
 namespace online_school.Views
 {
@@ -14,7 +15,7 @@ namespace online_school.Views
         private ServiceEnrolment _serviceEnrolment;
         private ServiceStudent _serviceStudent;
 
-        private Teacher teacher1 = new Teacher("1A", "prof1@mail.com", "aaa", "Daniel Ionescu", 30);
+        private Teacher teacher1 = new Teacher("AA", "prof1@mail.com", "aaa", "Daniel Ionescu", 30);
 
         public ViewTeacher()
         {
@@ -104,14 +105,11 @@ namespace online_school.Views
             {
                 
                 if (this._serviceCourse.IsCourseTeachedBy(_numeMaterie, this.teacher1.GetId()))
-                {
-
-                    
+                {                   
                     String idMaterie = "";
                     String idProfesor = "";
                     idProfesor = this.teacher1.GetId();
                    
-
                     idMaterie = this._serviceCourse.FindCourseByTeacher(idProfesor);
 
                     List<String> idStudenti = new List<String>();
@@ -125,14 +123,36 @@ namespace online_school.Views
                         Console.WriteLine(i.ToString());
                     }
                         
-
-
-
-
                 }
                 else
                 {
                     Console.WriteLine("Nu puteti afla detalii despre un curs care nu va apartine.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Something went wrong...");
+            }
+        }
+        public void MostPopularCourse(Teacher teacher1)
+        {
+            int max = -99;
+            int nr = 0;
+            int poz = 0;
+            List<String> materii = new List<String>();
+            try
+            {
+                if (this._serviceCourse.CoursesTeachedByProfesor(teacher1.GetId()).Count>0)
+                {
+                     materii = _serviceCourse.CoursesTeachedByProfesor(teacher1.GetId());
+                     poz = this._serviceEnrolment.Maxim(materii);
+               
+                     Console.WriteLine("Cel mai popular curs este " + this._serviceCourse.ConvertIdToName(materii[poz]));
+                    
+                }
+                else
+                {
+                     Console.WriteLine("Nu predati niciun curs");
                 }
             }
             catch (Exception ex)
@@ -147,7 +167,8 @@ namespace online_school.Views
             Console.WriteLine("Apasati tasta 1 pentru a edita informatii despre cursul dvs.");
             Console.WriteLine("Apasati tasta 2 pentru a afisa cati elevi sunt inscrisi la materia dvs.");
             Console.WriteLine("Apasati tasta 3 pentru a afista lista studentiilor inscrisi la materia dvs.");
-            
+            Console.WriteLine("Apasati tasta 4 pentru a afista cel mai popular curs.");
+
 
         }
         public void Play()
@@ -179,6 +200,10 @@ namespace online_school.Views
 
                         StudentsName(teacher1);
                         
+                        break;
+
+                    case 4:
+                        MostPopularCourse(teacher1);
                         break;
                     
                     default:

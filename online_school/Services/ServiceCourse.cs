@@ -247,6 +247,25 @@ namespace online_school.Services
                     idMaterie = _courseList[i].GetId();
             return idMaterie;
         }
+        public List<String> CoursesTeachedByProfesor(String idProfesor)
+        {
+            List<String> materiiPredate = new List<String>();
+            for (int i = 0; i < _courseList.Count; i++)
+                if (_courseList[i].GetTeacherID().Equals(idProfesor))
+                    materiiPredate.Add(_courseList[i].GetId());
+            return materiiPredate;
+
+        }
+        public String ConvertIdToName(String idMaterie)
+        {
+            String ceva = "";
+            for (int i = 0; i < _courseList.Count; i++)
+                if (_courseList[i].GetId().Equals(idMaterie))
+                    ceva = _courseList[i].GetCourseName();
+            return ceva;
+
+
+        }
 
 
     }

@@ -157,6 +157,16 @@ namespace online_school.Services
                     }
             return aux;
        }
+       public List<String> GetStudentNameByEnrolmentId(List<String> idStudenti)
+        {
+            List<String> numeStudenti = new List<String>();
+            for (int i = 0; i < _studentList.Count(); i++)
+                for (int j = 0; j < idStudenti.Count(); j++)
+                    if (_studentList[i].GetId().Equals(idStudenti[j]))
+                        numeStudenti.Add(_studentList[i].GetName());
+            return numeStudenti;
+
+        }
 
     }
 }

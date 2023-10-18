@@ -175,6 +175,71 @@ namespace online_school.Services
                     }
             return aux;
         }
+        public void UpdateCourseByTeacher(String courseName, String newCourseName, String courseDescription, int points, int duration)
+        {
+            for (int i = 0; i < _courseList.Count; i++)
+            {
+                if (_courseList[i].GetCourseName().Equals(courseName))
+                {
+
+                    _courseList[i].SetCourseName(newCourseName);
+                    _courseList[i].SetCourseInformation(courseDescription);
+                    _courseList[i].SetPoints(points);
+                    _courseList[i].SetDuration(duration);
+                    
+                }
+            }
+        }
+      
+        //public List<Course> showSpecificCourses(String id)
+        //{
+
+        //    List<Course> courseList = new List<Course>();
+
+
+        //    for (int i = 0; i < _courseList.Count(); i++)
+        //    {
+
+
+        //        if (_courseList[i].GetTeacherID().Equals(id))
+        //        {
+
+        //            courseList.Add(_courseList[i]);
+        //        }
+        //    }
+
+        //    return courseList;
+        //}
+
+
+        public bool IsCourseTeachedBy(String courseName,String teacherId) {
+
+            for (int i = 0; i < _courseList.Count(); i++)
+            {
+
+
+                if (_courseList[i].GetCourseName().Equals(courseName))
+                {
+
+                    if (_courseList[i].GetTeacherID().Equals(teacherId))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
         
+        public String GetCourseIdByTeacher(String teacherId)
+        {
+            String idMaterie = "";
+            for (int i = 0; i < _courseList.Count; i++)
+                if (_courseList[i].GetTeacherID().Equals(teacherId))
+                    idMaterie= _courseList[i].GetId();
+            return idMaterie;
+        }
+
+
     }
 }

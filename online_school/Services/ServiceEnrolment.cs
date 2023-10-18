@@ -167,7 +167,7 @@ namespace online_school.Services
         }
        
 
-        //functie ce  parametru idUnui Curs si returneazxa numarul de enrolmenturi
+        //functie ce ia ca parametru idUnui Curs si returneazxa numarul de enrolmenturi
 
         public int nrEnrolments(String idStudent)
         {
@@ -224,6 +224,64 @@ namespace online_school.Services
 
             return id;
 
+        }
+
+        //todo:primim ca si parametru lista de cursuri predate de profesor
+        public List<String> studentsEnrolledAtSpecificCourse(List<Course> courses)
+        {
+            List<String> studentsIds = new List<string>();
+
+            for(int i=0;i<_enrolmentList.Count;i++)
+            {
+
+                for(int j = 0; j < courses.Count; j++)
+                {
+                    if (courses[j].GetId().Equals(_enrolmentList[i].GetIdCurs()))
+                    {
+
+                        if (!studentsIds.Contains(_enrolmentList[i].GetIdElev()))
+                        {
+
+                            studentsIds.Add(_enrolmentList[i].GetIdElev());
+                        }
+                    }
+                }
+
+            }
+
+            return studentsIds;
+           
+        }
+        public int NumberOfStudents(String idMaterie)
+        {
+            int ct = 0;
+            for(int i =0;i<_enrolmentList.Count;i++)
+            {
+                if (_enrolmentList[i].GetIdCurs().Equals(idMaterie))
+                    
+                        ct = ct+1;
+                
+            }
+            return ct;
+        }
+        public List<String> GetIdOfStudents(String idMaterie)
+        {
+            List<String> idStudenti = new List<String>();
+            int ct = 0;
+            for (int i = 0; i < _enrolmentList.Count; i++)
+            {
+                if (_enrolmentList[i].GetIdCurs().Equals(idMaterie))
+                {
+                    if (!idStudenti.Contains(_enrolmentList[i].GetIdElev()))
+                    {
+                        idStudenti.Add(_enrolmentList[i].GetIdElev());
+                    }
+                }
+                    
+                    
+
+            }
+            return idStudenti;
         }
 
 

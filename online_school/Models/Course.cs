@@ -14,17 +14,20 @@ namespace online_school.Models
         private string _courseInformation;
         private int _points;
         private int _duration;
+        private string _teacherID;
 
         public Course()
         {
 
         }
-        public Course(string id, string courseName, string courseInformation, int duration)
+        public Course(string id, string courseName, string courseInformation, int points, int duration, string teacherID)
         {
             _id = id;
             _courseName = courseName;
             _courseInformation = courseInformation;
+            _points = points;
             _duration = duration;
+            _teacherID = teacherID;
         }
 
         public Course(string proprietati)
@@ -35,6 +38,7 @@ namespace online_school.Models
             _courseInformation = atribute[2];
             _points = int.Parse(atribute[3]);
             _duration = int.Parse(atribute[4]);
+            _teacherID = atribute[5];
         }
 
         public String GetCourseDescription()
@@ -45,6 +49,8 @@ namespace online_school.Models
             text += "Mini-descriere curs: " + _courseInformation + "\n";
             text += "Puncte alocate curs: " + _points + "\n";
             text += "Durata curs: " + _duration + " saptamani" + "\n";
+            text += "ID Profesor: " + _teacherID;
+            Console.WriteLine();
 
             return text;
         }
@@ -87,6 +93,14 @@ namespace online_school.Models
         public void SetDuration(int duration)
         {
             this._duration = duration;
+        }
+        public string GetTeacherID()
+        {
+            return _teacherID;
+        }
+        public void SetTeacherID(String teacherID)
+        {
+            this._teacherID = teacherID;
         }
     }
 }
